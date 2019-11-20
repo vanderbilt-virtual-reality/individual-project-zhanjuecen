@@ -1,0 +1,25 @@
+﻿Instructions:
+1. Press START GAME to start the game.
+2. Navigate the scene by four keys: W, A, S, D
+3. Left click your mouse to throw a dart. Your force is controlled by how long you press the button, as indicated by the force disk (Move your mouse to change directions so that you can hit the target!)
+4. Your score will be calculated based on where your dart lands on the dartboard. 
+ If score == 100, you win;
+ Else if score < -10, you lose;
+ Else you are in the game unless you press the Quit button.
+5. Click Retry to restart the game and the previous score will be cleared.
+
+
+Some reflections on this game:
+The first-person game Throw a Dart is a fun game made in Unity 3D, which is created for simulating the real-world dart throwing experience. The motivation for this game came from my six-year-old little cousin. She had a dartboard in her room and she was extremely fond of throwing darts in her free time. However, it was not desirable that those darts kept bouncing off the low-quality dartboard and hitting walls in her room, leaving a number of small holes. For the sake of neatness and safety, she has been prevented from throwing darts by her family. Therefore, I would like to create a game to provide her with an immersive and real environment for throwing darts. The target audience of this game is children aged from 6 to 12 who are interested in throwing darts and yet still do not want to take the risks of damaging surrounding environment or getting injured. 
+
+
+The environment of this game was set outdoors, where players can navigate the scene with keyboard control and view buildings, ramps and rocks. I picked the open space in order for players to gain a better field of vision and and not to experience any pressure when throwing a dart. When they clicked START GAME, players are able to view where the mouse points, which also controls the angle and direction of darts. To simulate the magnitude of force when people throw a dart, I set up a force disk to guide players to increase the time they pressed down the mouse, which as a result increases the magnitude of force. Once players determine the right angle, direction and force, a dart will be thrown under the influence of those properties. The dartboard consists of 7 regions, with points ranging from 1 to 10. For example, if a dart hits the center red point of the dartboard, the score will be increased by 10, and if a dart fails to hit any region, one point will be taken off the score. Any score below 10 will automatically trigger the end of the game and players can choose to retry or quit.  If the score reaches 100, a box will pop up to indicate the player wins the game. It is worth mentioning that to make the game to imitate the real-word experience, I have added a wind vector which is assigned a random direction and magnitude each time a dart is thrown. Due to randomness of winds, a dart can be deviated from the original trajectory and the game is more interesting to play. 
+
+
+VR is a good medium to achieve my original goal due to Unity’s physics engine and immersive first-person experience. I attached a rigidbody to any dart and attempted to mimic forces exerted on the dart in the real world. I also used Unity collision mechanism to handle the collision between darts and the dartboard. Depending on where the collision is, a corresponding score will be calculated. I also made the game to be first person since it is more straightforward and will be easier to integrate with Oculus in the future. With the first person, players only need to care about what they see in the scene and they are indeed throwing a dart. 
+
+
+In terms of the scripting part of this game, I have tried my best to achieve object-oriented programming in C# and made 8 reusable classes including Arrow, CameraController, UIController and WindController etc. It is interesting to mention that all darts are created on demand and dynamically by scripts, with Factory Design Pattern. Those darts will be stored in a queue. A function will run at each frame to check the front of the queue, and if an arrow has finished its task (hit the dartboard or fall to the ground) for a few seconds, it will automatically get recycled with properties changed and added back to the queue. I used this recycling approach to prevent generating too much garbage and slowing down the game experience.
+
+
+Although this Unity game mostly meets my original expectations, there are several areas for improvement. First of all, user interfaces can be better. Currently I used Unity’s own text boxes for displaying words on buttons. They are functional but not pretty. For instance, the score display is not fancy enough and can be improved by using extra assets. Due to the time and money constraints, I used arrows to represent darts instead of making a dart myself in Blender or buying one from asset store. In addition, the game can be made more challenging for players by moving the dartboard in a random way. (In reality the dartboard stays fixed, but this is a fun feature empowered by VR). Lastly,  Oculus integration can be done to improve the VR experience.
